@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessCenter.Infrastructure", "FitnessCenter.Infrastructure\FitnessCenter.Infrastructure.csproj", "{30E04689-1B9A-429C-9021-98ECB02C68D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessCenter.Core", "FitnessCenter.Core\FitnessCenter.Core.csproj", "{51838EA6-308E-4084-BDD7-ABA67E0E1BB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessCenter.API", "FitnessCenter.API\FitnessCenter.API.csproj", "{BF999747-9302-461C-B048-082B74718B44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessCenter.Migrator", "FitnessCenter.Migrator\FitnessCenter.Migrator.csproj", "{EAAFC0DA-7260-487B-92AE-D7F6CFB0DA54}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30E04689-1B9A-429C-9021-98ECB02C68D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E04689-1B9A-429C-9021-98ECB02C68D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E04689-1B9A-429C-9021-98ECB02C68D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E04689-1B9A-429C-9021-98ECB02C68D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51838EA6-308E-4084-BDD7-ABA67E0E1BB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51838EA6-308E-4084-BDD7-ABA67E0E1BB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51838EA6-308E-4084-BDD7-ABA67E0E1BB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51838EA6-308E-4084-BDD7-ABA67E0E1BB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF999747-9302-461C-B048-082B74718B44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF999747-9302-461C-B048-082B74718B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF999747-9302-461C-B048-082B74718B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF999747-9302-461C-B048-082B74718B44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAAFC0DA-7260-487B-92AE-D7F6CFB0DA54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAAFC0DA-7260-487B-92AE-D7F6CFB0DA54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAAFC0DA-7260-487B-92AE-D7F6CFB0DA54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAAFC0DA-7260-487B-92AE-D7F6CFB0DA54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
