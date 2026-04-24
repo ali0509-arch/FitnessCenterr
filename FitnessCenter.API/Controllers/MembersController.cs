@@ -1,6 +1,7 @@
 using FitnessCenterr.Core.DTOs.Members;
 using FitnessCenterr.Core.Models;
 using FitnessCenterr.Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace FitnessCenterr.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize] // ← tilføj denne
 public class MembersController : ControllerBase
 {
     private readonly AppDbContext _db;

@@ -16,9 +16,8 @@ namespace FitnessCenterr.API.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly AppDbContext _db;
-    private readonly IConfiguration _config;
 
-    public AuthController(AppDbContext db, IConfiguration config) { _db = db; _config = config; }
+    public AuthController(AppDbContext db) { _db = db; }
 
     [HttpPost("register")]
     [AllowAnonymous]
@@ -29,10 +28,10 @@ public class AuthController : ControllerBase
 
         var user = new User
         {
-            Username = dto.Username,
+            Username     = dto.Username,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-            Role = dto.Role,
-            CreatedAt = DateTime.UtcNow
+            Enabled      = true,
+            Role         = dto.Role ?? "User"
         };
         _db.Users.Add(user);
         await _db.SaveChangesAsync();
@@ -47,7 +46,12 @@ public class AuthController : ControllerBase
         if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
             return Unauthorized(new { message = "Forkert brugernavn eller adgangskode." });
 
-        return Ok(new AuthResponseDto { Token = GenerateJwt(user), Username = user.Username, Role = user.Role });
+        return Ok(new AuthResponseDto
+        {
+            Token    = GenerateJwt(user),
+            Username = user.Username,
+            Role     = user.Role
+        });
     }
 
     [HttpPost("logout")]
@@ -58,7 +62,7 @@ public class AuthController : ControllerBase
     [Authorize]
     public IActionResult Me() => Ok(new {
         username = User.FindFirst(ClaimTypes.Name)?.Value,
-        role = User.FindFirst(ClaimTypes.Role)?.Value
+        role     = User.FindFirst(ClaimTypes.Role)?.Value
     });
 
     private string GenerateJwt(User user)
@@ -66,15 +70,16 @@ public class AuthController : ControllerBase
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.Role)
+            new Claim(ClaimTypes.Name,           user.Username),
+            new Claim(ClaimTypes.Role,           user.Role)
         };
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
+        var key = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes("fitness-center-super-secret-key-2024!!"));
         var token = new JwtSecurityToken(
-            issuer: _config["Jwt:Issuer"],
-            audience: _config["Jwt:Audience"],
-            claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(double.Parse(_config["Jwt:ExpiryMinutes"]!)),
+            issuer:            "FitnessAPI",
+            audience:          "FitnessAPIUsers",
+            claims:            claims,
+            expires:           DateTime.UtcNow.AddHours(12),
             signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
         return new JwtSecurityTokenHandler().WriteToken(token);
     }

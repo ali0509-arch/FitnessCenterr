@@ -160,6 +160,8 @@ foreach (var ms in memberships)
         new { mId = ms.MemberID, sId = ms.SubscriptionID, since = ms.StartDate.ToString("yyyy-MM-dd") });
 Console.WriteLine($"  Neo4j: {memberships.Count} HAS_SUBSCRIPTION relationer oprettet.");
 
+await neo4jDriver.CloseAsync(); // ← tilføj denne
+await neo4jDriver.DisposeAsync();
 await neo4jDriver.DisposeAsync();
 
 Console.WriteLine("\n✅ Migration fuldført! Data er nu i MySQL, MongoDB og Neo4j.");

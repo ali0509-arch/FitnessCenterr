@@ -23,8 +23,12 @@ public class AppDbContext : DbContext
             e.ToTable("users");
             e.HasKey(u => u.UserID);
             e.HasIndex(u => u.Username).IsUnique();
-            e.Property(u => u.Role).HasDefaultValue("User");
-        });
+            modelBuilder.Entity<User>(e =>
+            {
+                e.ToTable("app_user"); // ← skift til app_user
+                e.HasKey(u => u.UserID);
+                e.HasIndex(u => u.Username).IsUnique();
+            });        });
 
         // ── Trainer ───────────────────────────────────────────────
         modelBuilder.Entity<Trainer>(e =>
